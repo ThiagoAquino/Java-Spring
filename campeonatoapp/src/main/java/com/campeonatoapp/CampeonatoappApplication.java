@@ -1,4 +1,4 @@
-package com.campeonatoapp.campeonatoapp;
+package com.campeonatoapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

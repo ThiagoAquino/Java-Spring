@@ -1,4 +1,4 @@
-package com.campeonatoapp.campeonatoapp;
+package com.campeonatoapp;
 
 import java.util.Properties;
 
