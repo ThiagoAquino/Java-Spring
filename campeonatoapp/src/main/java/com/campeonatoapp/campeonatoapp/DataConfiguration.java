@@ -1,29 +1,30 @@
 package com.campeonatoapp.campeonatoapp;
 
-import javax.sql.DataSource;
+import java.util.Properties;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 @Configuration
 public class DataConfiguration { 
-
+		
 	@Bean
-	public DataSource dataSource() {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+		
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/campeonatosapp");
 		dataSource.setUsername("root");
 		dataSource.setPassword("1234");
-		return dataSource;
-	}
-
-	@Bean
-	public JpaVendorAdapter jpaVendorAdapter() {
+		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/campeonatosapp");
+		
+		Properties props = new Properties();
+		props.setProperty("hibernate.hbm2ddl.auto", "update");
+		
 		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 		adapter.setDatabase(Database.MYSQL);
 		adapter.setShowSql(true);
@@ -31,7 +32,13 @@ public class DataConfiguration {
 		adapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
 		adapter.setPrepareConnection(true);
 		
-		return adapter;
+		factory.setJpaVendorAdapter(adapter);
+		factory.setDataSource(dataSource);
+		factory.setJpaProperties(props);
+		factory.setPackagesToScan("com.campeonatoapp.models");
+		
+		
+		return factory;
 	}
 
 
