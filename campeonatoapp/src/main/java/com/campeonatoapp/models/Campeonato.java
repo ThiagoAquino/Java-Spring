@@ -34,6 +34,10 @@ public class Campeonato implements Serializable {
 		this.horario = horario;
 	}
 	
+	public Campeonato() {
+		
+	}
+	
 	
 	public String getNome() {
 		return nome;

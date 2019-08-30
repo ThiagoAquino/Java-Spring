@@ -1,7 +1,26 @@
-<html>
-<body>
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<h3> Ola mundo com spring boot</h3>
+<head>
+	<title>CampeonatosApp</title>
+</head>
+
+
+<body>
+	<h1>Lista de Campeonatos</h1>
+	<h3><a href="/cadastrarCampeonato">Cadastrar Campeonato</a></h3>
+	
+	<div th:each="campeonato : ${campeonatos}">
+		<div class="row">
+			<p><span th:text="${campeonato.nome}"></span></p>
+			<p><span th:text="${campeonato.local}"></span></p>
+			<p><span th:text="${campeonato.data}"></span></p>
+			<p><span th:text="${campeonato.horario}"></span></p>
+		</div>
+	
+		
+	</div>
 
 
 </body>
