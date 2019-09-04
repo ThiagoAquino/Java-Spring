@@ -1,11 +1,13 @@
 package com.campeonatoapp.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,7 +27,11 @@ public class Campeonato implements Serializable {
 	private String local;
 	private String data;
 	private String horario;
-		
+	
+	
+	/** Aqui é definida a relação, onde cada campepnato tem várias academias */
+	@OneToMany
+	private List<Academia> academias;
 	
 	public Campeonato(String nome, String local, String data, String horario) {
 		this.nome = nome;
@@ -37,7 +43,6 @@ public class Campeonato implements Serializable {
 	public Campeonato() {
 		
 	}
-	
 	
 	public String getNome() {
 		return nome;
