@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet"
+	href="materialize/css/materialize.min.css" media="screen,projection" />
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>CampeonatosApp</title>
+</head>
+
+
+<body>
+	<h1>Campeonato</h1>
+	<h3><a href="/campeonatos" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i></a>Lista de Campeonatos</a></h3> 
+	<div th:each="campeonato : ${campeonato}" class="container detalhesCampeonato">
+		<div class="row">
+			<p>Nome: <span th:text="${campeonato.nome}"></span></p>
+			<p>Local: <span th:text="${campeonato.local}"></span></p>
+			<p>Data: <span th:text="${campeonato.data}"></span></p>
+			<p>Horario: <span th:text="${campeonato.horario}"></span></p>
+		</div>
+		
+	
+	
+	
+	
+	</div>
+
+	<!--JavaScript at end of body for optimized loading-->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+</html>
