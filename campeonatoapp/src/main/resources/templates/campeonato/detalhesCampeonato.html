@@ -28,6 +28,8 @@
 			<p>Horario: <span th:text="${campeonato.horario}"></span></p>
 		</div>
 		
+		<th:block th:include="mensagemValidacao"></th:block>
+		
 		<form method="post">
 			Registro: <input type="text" value="" name="registro"/>
 			Nome: <input type="text" value="" name="nomeAcademia"/>

@@ -1,17 +1,17 @@
 package com.campeonatoapp.models;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Academia {
 	
 	@Id
+	@NotEmpty
 	private String registro;
+	@NotEmpty
 	private String nomeAcademia;
 	
 	/** Aqui é definida a relação, onde cada campeonato tem várias academias */

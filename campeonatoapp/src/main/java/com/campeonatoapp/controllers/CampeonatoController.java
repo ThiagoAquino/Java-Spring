@@ -1,11 +1,15 @@
 package com.campeonatoapp.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.campeonatoapp.models.Academia;
 import com.campeonatoapp.models.Campeonato;
@@ -28,10 +32,13 @@ public class CampeonatoController {
 	}
 	
 	@RequestMapping(value="/cadastrarCampeonato", method=RequestMethod.POST)
-	public String form(Campeonato campeonato) {
-		
+	public String form(@Valid Campeonato campeonato, BindingResult result, RedirectAttributes attributes) {
+		if(result.hasErrors()) {
+			attributes.addFlashAttribute("mensagem", "verifique os campos");
+			return "redirect:/cadastrarCampeonato";
+		}
 		campeonatoRepository.save(campeonato);
-		
+		attributes.addFlashAttribute("mensagem", "Campeonato adicionado com sucesso");
 		return "redirect:/cadastrarCampeonato";
 	}
 	
@@ -55,10 +62,17 @@ public class CampeonatoController {
 	}
 	
 	@RequestMapping(value="/{codigo}", method=RequestMethod.POST)
-	public String detalhesCampeonatoPost(@PathVariable("codigo")long codigo, Academia academia) {
+	public String detalhesCampeonatoPost(@PathVariable("codigo")long codigo,@Valid Academia academia, BindingResult result, RedirectAttributes attributes) {
+		/*Essa condição faz uma verificação se os campos estão preenchidos, caso contrário, 
+		 * envia uma mensagem pra view */
+		if(result.hasErrors()) {
+			attributes.addFlashAttribute("mensagem", "verifique os campos");
+			return "redirect:/{codigo}";
+		}
 		Campeonato campeonato = campeonatoRepository.findByCodigo(codigo);
 		academia.setCampeonato(campeonato);
 		academiaRepository.save(academia);
+		attributes.addFlashAttribute("mensagem", "Academia adicionada com sucesso");
 		
 		
 		return "redirect:/{codigo}";
