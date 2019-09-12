@@ -69,7 +69,6 @@ public class Campeonato implements Serializable {
 		this.horario = horario;
 	}
 
-
 	public long getCodigo() {
 		return codigo;
 	}
@@ -77,6 +76,14 @@ public class Campeonato implements Serializable {
 
 	public void setCodigo(long codigo) {
 		this.codigo = codigo;
+	}
+
+	public List<Academia> getAcademias() {
+		return academias;
+	}
+
+	public void setAcademias(List<Academia> academias) {
+		this.academias = academias;
 	}
 	
 	

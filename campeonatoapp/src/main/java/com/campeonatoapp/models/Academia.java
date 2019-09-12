@@ -1,9 +1,11 @@
 package com.campeonatoapp.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Academia {
@@ -45,8 +47,6 @@ public class Academia {
 	public void setCampeonato(Campeonato campeonato) {
 		this.campeonato = campeonato;
 	}
-	
-	
 
 	
 	

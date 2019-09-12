@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.campeonatoapp.models.Academia;
 import com.campeonatoapp.models.Campeonato;
+import com.campeonatoapp.repository.AcademiaRepository;
 import com.campeonatoapp.repository.CampeonatoRepository;
 
 @Controller
@@ -15,6 +17,10 @@ public class CampeonatoController {
 	
 	@Autowired
 	private CampeonatoRepository campeonatoRepository;
+	
+	@Autowired
+	private AcademiaRepository academiaRepository;
+	
 	
 	@RequestMapping(value="/cadastrarCampeonato", method=RequestMethod.GET)
 	public String form() {
@@ -42,6 +48,20 @@ public class CampeonatoController {
 		Campeonato campeonato = campeonatoRepository.findByCodigo(codigo);
 		ModelAndView mv = new ModelAndView("campeonato/detalhesCampeonato");
 		mv.addObject("campeonato", campeonato);
+		
+		Iterable<Academia> academias = academiaRepository.findByCampeonato(campeonato);
+		mv.addObject("academias", academias);
 		return mv;
 	}
+	
+	@RequestMapping(value="/{codigo}", method=RequestMethod.POST)
+	public String detalhesCampeonatoPost(@PathVariable("codigo")long codigo, Academia academia) {
+		Campeonato campeonato = campeonatoRepository.findByCodigo(codigo);
+		academia.setCampeonato(campeonato);
+		academiaRepository.save(academia);
+		
+		
+		return "redirect:/{codigo}";
+	}
+	
 }
