@@ -7,4 +7,5 @@ import com.campeonatoapp.models.Campeonato;
 
 public interface AcademiaRepository extends CrudRepository<Academia, String>{
 	Iterable<Academia> findByCampeonato(Campeonato campeonato);
+	Academia findByRegistro(String registro);
 }

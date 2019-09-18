@@ -18,10 +18,10 @@ public class DataConfiguration {
 		
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setUsername("root");
-		dataSource.setPassword("1234");
+		dataSource.setPassword("thiago");
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/campeonatosapp");
-		
+		dataSource.setUrl("jdbc:mysql://localhost:3306/campeonatosapp?useTimezone=true&serverTimezone=UTC");
+	
 		Properties props = new Properties();
 		props.setProperty("hibernate.hbm2ddl.auto", "update");
 		
@@ -29,7 +29,7 @@ public class DataConfiguration {
 		adapter.setDatabase(Database.MYSQL);
 		adapter.setShowSql(true);
 		adapter.setGenerateDdl(true);
-		adapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
+		adapter.setDatabasePlatform("org.hibernate.dialect.MySQL8Dialect");
 		adapter.setPrepareConnection(true);
 		
 		factory.setJpaVendorAdapter(adapter);

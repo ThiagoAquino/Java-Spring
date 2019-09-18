@@ -3,17 +3,17 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-<!--Import Google Icon Font-->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet" />
-<!--Import materialize.css-->
-<link type="text/css" rel="stylesheet"
-	href="materialize/css/materialize.min.css" media="screen,projection" />
+		<title>CampeonatosApp</title>
+ 		<!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
 
-<!--Let browser know website is optimized for mobile-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link rel="stylesheet" href="style/styleCss.css"/>
 
-<title>CampeonatosApp</title>
+
 </head>
 
 
@@ -21,7 +21,7 @@
 	<h1>Lista de Campeonatos</h1>
 	<h3>
 		<a href="/cadastrarCampeonato" class="waves-effect waves-light btn"><i
-			class="material-icons left">format_list_bulleted</i></a>Cadastrar Campeonato</a>
+			class="material-icons left">add_cricle_outline</i></a>Cadastrar Campeonato</a>
 	</h3> 
 	<table class="container">
 		<thead>
@@ -30,21 +30,20 @@
 				<th>Local</th>
 				<th>Data</th>
 				<th>Horario</th>
+				<th>Deletar</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="campeonato : ${campeonatos}">
-				<td><<a th:href="${(#mvc.url('CC#detalhesCampeonato').arg(0, campeonato.codigo)).build()}"><span th:text="${campeonato.nome}"></span></a></td>
+				<td><a th:href="${(#mvc.url('CC#detalhesCampeonato').arg(0, campeonato.codigo)).build()}"><span th:text="${campeonato.nome}"></span></a></td>
 				<td><span th:text="${campeonato.local}"></span></td>
 				<td><span th:text="${campeonato.data}"></span></td>
-				<td>
-			<span th:text="${campeonato.horario}"></span>
-				</td>
-				</tr>
+				<td><span th:text="${campeonato.horario}"></span></td>
+				<td><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('CC#deletarCampeonato').arg(0, campeonato.codigo)).build()}"><i class="material-icons left">delete</i></a></td>
+			</tr> 
 		</tbody>
 	</table>
 
-	<!--JavaScript at end of body for optimized loading-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 </body>

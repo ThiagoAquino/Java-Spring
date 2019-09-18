@@ -36,17 +36,23 @@
 			<button type="submit" class="waves-effect waves-light btn">Adicionar</button>
 		</form>	
 	</div>
-	<h5>Lista de Academias</h5>
-	<div class="container" th:each="academia : ${academias}">
-			<div class="row">
-			<div class="input-field col s6">
-				<p><span th:text="${academia.nomeAcademia}"></span></p>
-			</div>
-			<div class="input-field col s3">
-				<p><span th:text="${academia.registro}"></span></p>
-			</div>
-		</div>
-	</div>
+	
+	<table class="container tabelaAcademia">
+		<thead>
+			<tr>
+				<th>Nome Academia</th>
+				<th>Registro</th>
+				<th>Deletar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="academia : ${academias}">
+				<td><span th:text="${academia.nomeAcademia}"></span></td>
+				<td><span th:text="${academia.registro}"></span></td>
+				<td><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('CC#deletarAcademia').arg(0, academia.registro)).build()}"><i class="material-icons left">delete</i></a></td>
+			</tr>
+		</tbody>
+	</table>
 
 	<!--JavaScript at end of body for optimized loading-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

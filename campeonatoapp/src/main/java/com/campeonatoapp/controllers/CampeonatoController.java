@@ -61,6 +61,14 @@ public class CampeonatoController {
 		return mv;
 	}
 	
+	@RequestMapping("/deletarCampeonato")
+	public String deletarCampeonato(long codigo) {
+		Campeonato campeonato = campeonatoRepository.findByCodigo(codigo);
+		campeonatoRepository.delete(campeonato);
+		return "redirect:/campeonatos";
+		
+	}
+	
 	@RequestMapping(value="/{codigo}", method=RequestMethod.POST)
 	public String detalhesCampeonatoPost(@PathVariable("codigo")long codigo,@Valid Academia academia, BindingResult result, RedirectAttributes attributes) {
 		/*Essa condição faz uma verificação se os campos estão preenchidos, caso contrário, 
@@ -76,6 +84,17 @@ public class CampeonatoController {
 		
 		
 		return "redirect:/{codigo}";
+	}
+	
+	@RequestMapping("/deletarAcademia")
+	public String deletarAcademia(String registro) {
+		Academia academia = academiaRepository.findByRegistro(registro);
+		academiaRepository.delete(academia);
+		
+		Campeonato campeonato = academia.getCampeonato();
+		long codigoLong = campeonato.getCodigo();
+		String codigo = "" + codigoLong;
+		return "redirect:/"+codigo;
 	}
 	
 }
